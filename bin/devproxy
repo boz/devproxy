@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'devproxy'
+
+Devproxy.connect "boz", "boz", 3000
+

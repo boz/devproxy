@@ -9,8 +9,11 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Adam Bozanich"]
   gem.email         = ["adam.boz@gmail.com"]
   gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.summary       = %q{devproxy.io client proxy}
+  gem.homepage      = "https://github.com/boz/devproxy"
+
+  gem.add_dependency "net-ssh", "~> 2.6.7"
+  gem.add_development_dependency "rspec"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
