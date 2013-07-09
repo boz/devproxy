@@ -21,12 +21,12 @@ end
 module Devproxy
   # Your code goes here...
   def self.connect username, proxyname, port
-    Net::SSH.start("devproxy.vg", "devproxy-#{username}") do |ssh|
+    Net::SSH.start("devproxy.net", "devproxy-#{username}", {:port => 2222}) do |ssh|
       ssh.forward.remote(port, "localhost", 0, '0.0.0.0')
       channel = ssh.open_channel do |ch|
         ch.exec(proxyname) do |ch,success|
           ch.on_data do |ch,data|
-            puts data
+            $stdout.write(data)
           end
           ch.on_close do
             puts "done"
@@ -34,7 +34,7 @@ module Devproxy
         end
       end
       channel.wait
-     #ssh.loop { true }
+      ssh.loop { true }
     end
   end
 end
