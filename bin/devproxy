@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 require 'devproxy'
-cli = Devproxy::CLI::create(ARGV)
-trap("SIGINT") do
-  puts "\nexiting..."
-  cli.stop!
+
+begin
+  Devproxy::CLI::loop!(ARGV)
+rescue Interrupt
+  puts "\nbye"
+rescue => e
+  puts e
 end
-cli.loop!

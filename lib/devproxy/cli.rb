@@ -2,13 +2,7 @@ require 'devproxy/connection'
 require 'devproxy/options'
 require 'optparse'
 module Devproxy
-  class CLI < Struct.new(:options,:connection)
-    def loop!
-      connection.loop!
-    end
-    def stop!
-      connection.stop!
-    end
+  class CLI < Devproxy::Connection
     def self.parse(argv)
       options = Devproxy::Options::default
       opts    = OptionParser.new
@@ -55,8 +49,7 @@ module Devproxy
       options
     end
     def self.create(argv)
-      options = parse(argv)
-      new(options,Devproxy::Connection.create(options))
+      super(parse(argv))
     end
   end
 end
