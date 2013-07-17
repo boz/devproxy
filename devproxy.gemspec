@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Devproxy::VERSION
   gem.authors       = ["Adam Bozanich"]
   gem.email         = ["adam.boz@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{devproxy.io client proxy}
+  gem.summary       = %q{https://devproxy.io client gem}
+  gem.description   = %q{https://devproxy.io client gem}
   gem.homepage      = "https://github.com/boz/devproxy"
 
   gem.add_dependency "net-ssh", "~> 2.6.7"
