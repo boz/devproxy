@@ -11,12 +11,15 @@ module Devproxy
     MAX_DOTS = 60
 
     def initialize options, ssh
-      @options , @ssh   = options , ssh
-      @halt    , @dotno = false   , 0
+      @options, @ssh, @halt = options, ssh, false
+      reset_dots!
     end
 
     def loop!
       @ssh.loop { !halt? }
+    rescue Errno::ECONNREFUSED
+      on_stderr "CONNECTION REFUSED.  Is there anything listening on port #{options.port}?"
+      retry
     end
     def stop!
       @halt = true
@@ -26,19 +29,24 @@ module Devproxy
     end
 
     def on_stdout data
-      if (@dotno += 1) % MAX_DOTS == 0
-        $stdout.puts "\n"
-      end
       $stdout.write data
+      if (@dotno += 1) % MAX_DOTS == 0
+        $stdout.write "\n"
+      end
     end
 
     def on_stderr data
-      @dotno = 0
       $stderr.puts "\nError: #{data}"
+      reset_dots!
     end
 
     def on_close
       stop!
+    end
+
+    protected
+    def reset_dots!
+      @dotno = 0
     end
 
     def self.loop!(options)
