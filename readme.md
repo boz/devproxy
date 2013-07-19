@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-First create an account on [devproxy.io](https://devproxy.io) and upload
+Create an account on [devproxy.io](https://devproxy.io) and upload
 your ssh public key.
 
 To tunnel connections for `example.devproxy.io` to port 3000 on your local machine, run:
