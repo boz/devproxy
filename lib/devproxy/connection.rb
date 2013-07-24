@@ -74,6 +74,7 @@ module Devproxy
     def self.open_ssh(options)
       Net::SSH.start(options.host, options.username,{
         :port => options.remote_port,
+        :user_known_hosts_file => "/dev/null",
       })
     end
   end
