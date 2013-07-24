@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{https://devproxy.io client gem}
   gem.description   = %q{https://devproxy.io client gem}
   gem.homepage      = "https://github.com/boz/devproxy"
+  gem.license       = "MIT"
 
   gem.add_dependency "net-ssh", "~> 2.6.7"
   gem.add_development_dependency "rspec"
