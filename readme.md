@@ -1,4 +1,4 @@
-# Devproxy
+# Devproxy [![Build Status](https://travis-ci.org/boz/devproxy.png?branch=master)](https://travis-ci.org/boz/devproxy)
 
 [devproxy.io](https://devproxy.io) client used for tunneling
 connections from a public domain (`https://example.devproxy.io`) to your
