@@ -1,5 +1,5 @@
 module Devproxy
-  class Options < Struct.new(:user, :proxy, :port, :host, :remote_port)
+  class Options < Struct.new(:user, :proxy, :port, :host, :remote_port, :listen, :verbose)
     def username
       "devproxy-#{user}"
     end
@@ -14,6 +14,8 @@ module Devproxy
       default.host        = "ssh.devproxy.io"
       default.remote_port = 2222
       default.port        = 3000
+      default.listen      = "0.0.0.0"
+      default.verbose     = false
       default
     end
   end

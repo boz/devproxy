@@ -34,7 +34,7 @@ module Devproxy
       return unless testing?
       @test_server = Server.new({
         :Port        => options.port,
-        :BindAddress => "0.0.0.0"
+        :BindAddress => options.listen,
       })
     end
 
@@ -69,7 +69,16 @@ module Devproxy
         options.test = true
       end
 
+      opts.on "-v", "--verbose",
+              "Verbose output (default: #{options.verbose})" do |x|
+        options.verbose = true
+      end
+
       if ENV['DEVPROXY_DEVELOPMENT']
+        opts.on "-l ADDRESS", "--listen ADDRESS",
+                "Local address to listen on (default: #{options.listen})" do |x|
+          options.listen = x
+        end
         opts.on "--host HOST", "remote hostname." do |x|
           options.host = x
         end
