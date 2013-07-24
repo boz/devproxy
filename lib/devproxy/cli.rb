@@ -1,10 +1,54 @@
 require 'devproxy/connection'
 require 'devproxy/options'
 require 'optparse'
+
 module Devproxy
   class CLI < Devproxy::Connection
+    class Options < Devproxy::Options
+      attr_accessor(:test)
+    end
+
+    autoload :Server, 'devproxy/cli/server'
+
+    def initialize *args
+      super(*args)
+      initialize_test_server
+    end
+
+    def loop!
+      start_test_server
+      super
+    end
+
+    def stop!
+      stop_test_server
+      super
+    end
+
+    protected
+    def testing?
+      options.test
+    end
+
+    def initialize_test_server
+      return unless testing?
+      @test_server = Server.new({
+        :Port        => options.port,
+        :BindAddress => "0.0.0.0"
+      })
+    end
+
+    def start_test_server
+      return unless testing?
+      @test_server.start
+    end
+    def stop_test_server
+      return unless testing?
+      @test_server.stop
+    end
+
     def self.parse(argv)
-      options = Devproxy::Options::default
+      options = Options::default
       opts    = OptionParser.new
       opts.banner = "Usage: devproxy user [proxy] [options...]"
 
@@ -19,6 +63,10 @@ module Devproxy
       opts.on "-p PORT", "--port PORT", Integer,
               "Local port accepting connections (default: #{options.port})" do |x|
         options.port = x
+      end
+
+      opts.on "--test-server", "Launch local server for testing" do |x|
+        options.test = true
       end
 
       if ENV['DEVPROXY_DEVELOPMENT']
