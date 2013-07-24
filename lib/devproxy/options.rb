@@ -1,7 +1,7 @@
 module Devproxy
   class Options < Struct.new(:user, :proxy, :port, :host, :remote_port, :listen, :verbose)
     def username
-      "devproxy-#{user}"
+      "devproxy-#{user}" if !!user && !user.empty?
     end
     def valid?
       !( user.nil?  || user.empty?      ||
