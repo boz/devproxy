@@ -13,23 +13,27 @@ class Devproxy::CLI::Server < WEBrick::HTTPServer
       response.body = %{
         <html>
         <head>
+          <link rel="stylesheet" href="/css/style.css">
           <title>Devproxy Test Server</title>
         </head>
         <body>
-          <h2>Hello from #{h(sysname)}</h2>
-          <table>
-            <tbody>
-              <tr>
-                <td>host</td><td>#{h(request.host)}</td>
-              </tr>
-              <tr>
-                <td>token</td><td>#{h(token)}</td>
-              </tr>
-              <tr>
-                <td>ssl?</td><td>#{request.ssl?}</td>
-              </tr>
-            </tbody>
-          </table>
+          <h1>Hello from #{h(sysname)}</h2>
+          <div class="details">
+            <table>
+              <caption>Tunnel Details</caption>
+              <tbody>
+                <tr>
+                  <td>host</td><td>#{h(request.host)}</td>
+                </tr>
+                <tr>
+                  <td>protocol</td><td>#{h(request['x-forwarded-proto'])}</td>
+                </tr>
+                <tr>
+                  <td>token</td><td>#{h(token)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </body>
         </html>
       }
@@ -40,7 +44,8 @@ class Devproxy::CLI::Server < WEBrick::HTTPServer
   end
   def initialize(*args)
     super
-    mount "/", Servlet
+    mount "/"   , Servlet
+    mount "/css", WEBrick::HTTPServlet::FileHandler, File.join(File.dirname(__FILE__),"..","..","..","data","css")
   end
 
   def start(*args)

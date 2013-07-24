@@ -1,0 +1,21 @@
+body {
+  text-align: center;
+}
+
+.details {
+  width: 100%;
+}
+
+.details table {
+  margin: auto;
+  font-size: 30px;
+  border-collapse: collapse;
+}
+
+.details table tr:nth-child(odd) {
+  background-color: #efefef;
+}
+
+.details table td {
+  padding: 5px;
+}
