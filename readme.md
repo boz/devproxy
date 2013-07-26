@@ -16,25 +16,29 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install devproxy --source https://github.com/boz/devproxy.git
+    $ gem install devproxy -v '~> 0.2.0'
 
 ## Usage
 
 Create an account on [devproxy.io](https://devproxy.io) and upload
 your ssh public key.
 
-To tunnel connections for `example.devproxy.io` to port 3000 on your local machine, run:
+To tunnel connections for `username.devproxy.io` to port 3000 on your local machine, run:
 
-    $ devproxy example
+    $ devproxy username
 
 You can specify the local port with `-p`:
 
-    $ devproxy example -p 3000
+    $ devproxy username -p 5000
 
 If the host that you want to tunnel is not the same as your [devproxy.io](https://devproxy.io)
 username, specify the hostname as the second argument:
 
-    $ devproxy example test
+    $ devproxy username proxyname
+
+`devproxy` comes with a server for testing.  enable it with the `--test-server` flag:
+
+    $ devproxy username proxyname -p 5000 --test-server
 
 ### Rails
 
