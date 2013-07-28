@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install devproxy -v '~> 0.2.0'
+    $ gem install devproxy
 
 ## Usage
 

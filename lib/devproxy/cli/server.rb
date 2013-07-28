@@ -38,6 +38,9 @@ class Devproxy::CLI::Server < WEBrick::HTTPServer
         </html>
       }
     end
+    def do_POST(request,response)
+      do_GET(request,response)
+    end
     def h(str)
       CGI::escape_html(str)
     end
