@@ -5,7 +5,7 @@ class Devproxy::CLI::Server < WEBrick::HTTPServer
     def do_GET(request,response)
       token   = request.cookies.detect { |x| x.name == "DEVPROXY" }
       token &&= token.value
-      token ||= "NONE"
+      token ||= "none"
       sysname = "#{%x{whoami}}@#{%x{hostname}}"
 
       response.status          = 200
@@ -42,7 +42,7 @@ class Devproxy::CLI::Server < WEBrick::HTTPServer
       do_GET(request,response)
     end
     def h(str)
-      CGI::escape_html(str)
+      CGI::escapeHTML(str || "")
     end
   end
   def initialize(*args)
