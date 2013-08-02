@@ -11,8 +11,8 @@ module Devproxy
 
     def loop!
       @session.shutdown! if @session
-      @session = Session.create(options,self)
-      @session.loop!
+      @session = create_session
+      @session.loop! if @session
     rescue Errno::ECONNREFUSED
       on_stderr "CONNECTION REFUSED.  Is there anything listening on port #{options.port}?"
       retry
@@ -51,6 +51,13 @@ module Devproxy
     end
 
     protected
+    def create_session
+      Session.create(options,self)
+    rescue Errno::ECONNREFUSED
+      on_stderr "CONNECTION REFUSED: can't connect to remote port #{options.remote_port}"
+      stop!
+    end
+
     def reset_dots!
       @dotno = 0
     end
