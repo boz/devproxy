@@ -16,6 +16,10 @@ describe Devproxy::CLI do
       expect(parse("foo","bar","--port","20").port).to eq(20)
       expect(parse("foo","bar"              ).port).to eq(Devproxy::Options.default.port)
     end
+    it "should parse the remote port option" do
+      expect(parse("foo","bar","--remote-port","20").remote_port).to eq(20)
+      expect(parse("foo","bar"                     ).remote_port).to eq(Devproxy::Options.default.remote_port)
+    end
     it "should parse the test server option" do
       expect(parse("foo","bar","--test-server").test).to be_true
       expect(parse("foo","bar"                ).test).to be_false

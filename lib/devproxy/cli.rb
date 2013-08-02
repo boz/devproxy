@@ -82,9 +82,10 @@ module Devproxy
         opts.on "--host HOST", "remote hostname." do |x|
           options.host = x
         end
-        opts.on "--remote-port PORT",Integer,"remote SSH port" do |x|
-          options.remote_port = x
-        end
+      end
+
+      opts.on "--remote-port PORT",Integer,"remote SSH port (default: #{options.remote_port})" do |x|
+        options.remote_port = x
       end
 
       opts.on_tail "-h", "--help", "show this message" do
