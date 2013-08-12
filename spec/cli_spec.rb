@@ -1,10 +1,10 @@
 require 'spec_helper'
 describe Devproxy::CLI do
   describe "#parse" do
-    it "should default the proxy to the given name" do
+    it "should not have a default name" do
       options = parse("foo")
       expect(options.user).to  eq("foo")
-      expect(options.proxy).to eq("foo")
+      expect(options.proxy).to be_nil
     end
     it "should accept a different proxy name" do
       options = parse("foo","bar")

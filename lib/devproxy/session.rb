@@ -7,6 +7,7 @@ module Devproxy
     class Error::Authentication < Error        ; end
 
     HEARTBEAT = "HEARTBEAT"
+    CONNECT   = "CONNECT:"
 
     def shutdown!
       ssh.shutdown!
@@ -27,6 +28,8 @@ module Devproxy
         if stream == :stdout
           if data.start_with?(HEARTBEAT)
             connection.on_heartbeat(data)
+          elsif data.start_with?(CONNECT)
+            connection.on_connected(data[(CONNECT.size)..-1].chomp)
           else
             connection.on_stdout(data)
           end
@@ -37,7 +40,6 @@ module Devproxy
       channel.on_close do
         connection.on_close
       end
-      connection.on_connected
       new(ssh)
     rescue Net::SSH::AuthenticationFailed
       raise Error::Authentication, "Authentication Failed: Invalid username or SSH key"

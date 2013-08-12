@@ -5,7 +5,6 @@ module Devproxy
     end
     def valid?
       !( user.nil?  || user.empty?      ||
-         proxy.nil? || proxy.empty?     ||
          port.nil?  || remote_port.nil? ||
          host.nil?  || host.empty?       )
     end

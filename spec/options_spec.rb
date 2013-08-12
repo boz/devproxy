@@ -17,11 +17,11 @@ describe Devproxy::Options do
   end
 
   describe "valid?" do
-    it "should require a username" do
-      expect(default_options(:proxy => "foo")).to_not be_valid
+    it "should not require a proxy" do
+      expect(default_options(:user => "foo")).to be_valid
     end
     it "should require a username" do
-      expect(default_options(:user => "bar")).to_not be_valid
+      expect(default_options(:proxy => "bar")).to_not be_valid
     end
     it "should only need a username and proxy" do
       expect(default_options(:proxy => "foo", :user => "bar")).to be_valid

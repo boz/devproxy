@@ -22,8 +22,8 @@ module Devproxy
       @session.stop! if @session
     end
 
-    def on_connected
-      $stdout.puts "Tunneling requests from https://#{options.proxy}.devproxy.io to #{options.listen} port #{options.port}"
+    def on_connected(proxy)
+      $stdout.puts "Tunneling requests from https://#{proxy}.#{options.host} to #{options.listen} port #{options.port}"
     end
 
     def on_heartbeat data

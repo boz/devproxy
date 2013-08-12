@@ -55,7 +55,7 @@ module Devproxy
       opts.separator ""
       opts.separator "    user: \tDevproxy username."
       opts.separator "    proxy:\tThe name of the proxy you want to connect to (without the domain)."
-      opts.separator "          \tDefaults to `user`."
+      opts.separator "          \tDefaults to the user's default proxy."
       opts.separator "          \texample: 'foo' for tunneling 'foo.devproxy.io'"
 
       opts.separator ""
@@ -99,7 +99,7 @@ module Devproxy
       end
       opts.parse!(argv)
       options.user  = argv[0]
-      options.proxy = argv[1] || argv[0]
+      options.proxy = argv[1]
       unless options.valid?
         puts opts
         exit
