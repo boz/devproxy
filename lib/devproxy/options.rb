@@ -8,6 +8,9 @@ module Devproxy
          port.nil?  || remote_port.nil? ||
          host.nil?  || host.empty?       )
     end
+    def app_host
+      host.split(".")[-2..-1].join(".")
+    end
     def self.default
       default = new
       default.host        = "ssh.devproxy.io"

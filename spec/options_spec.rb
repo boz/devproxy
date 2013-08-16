@@ -37,6 +37,15 @@ describe Devproxy::Options do
     end
   end
 
+  describe "app_host" do
+    it "should return the tld when a subdomain is not given" do
+      expect(default_options(:host=> "foo.com").app_host).to eq("foo.com")
+    end
+    it "should return the tld when a subdomain is given" do
+      expect(default_options(:host=> "bar.foo.com").app_host).to eq("foo.com")
+    end
+  end
+
   def default_options(options = {})
     default = Devproxy::Options.default
     options.each do |key,value|

@@ -23,7 +23,7 @@ module Devproxy
     end
 
     def on_connected(proxy)
-      $stdout.puts "Tunneling requests from https://#{proxy}.#{options.host} to #{options.listen} port #{options.port}"
+      $stdout.puts "Tunneling requests from https://#{proxy}.#{options.app_host} to #{options.listen} port #{options.port}"
     end
 
     def on_heartbeat data
